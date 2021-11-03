@@ -1,0 +1,47 @@
+
+@font-face {
+
+    font-family: "OpenDyslexic";
+    src: url("fonts/OpenDyslexic/Regular.ttf");
+}
+
+@font-face {
+
+    font-family: "OpenDyslexic";
+    src: url("fonts/OpenDyslexic/Bold.ttf");
+    font-weight: bold;
+}
+
+* {
+
+    text-align: center;
+    font-family: OpenDyslexic;
+    font-size: 5vw;
+}
+
+body {
+
+    background-color: white;
+}
+
+div {
+
+    background-color: #ededee;
+    padding: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    border-radius: 1em;
+}
+
+#moustache {
+
+    width: 40%;
+    transition-duration: 0.1s;
+    animation-fill-mode: forwards;
+}
+
+#moustache:hover {
+
+    cursor: pointer;
+    transform: scale(105%);
+}
