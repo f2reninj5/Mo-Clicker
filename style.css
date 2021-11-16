@@ -1,4 +1,6 @@
 
+/* fix mobile scaling by scaling height instead of width */
+
 @font-face {
 
     font-family: "OpenDyslexic";
@@ -16,7 +18,7 @@
 
     text-align: center;
     font-family: OpenDyslexic;
-    font-size: 5vw;
+    font-size: 1vw;
 }
 
 body {
@@ -33,6 +35,11 @@ div {
     border-radius: 1em;
 }
 
+h {
+
+    font-size: 5vw;
+}
+
 #moustache {
 
     width: 40%;
@@ -44,4 +51,27 @@ div {
 
     cursor: pointer;
     transform: scale(105%);
+}
+
+form, input {
+
+    border: none;
+    border-radius: 1em;
+}
+
+input {
+
+    margin: 0.2em;
+}
+
+input[type=submit] {
+
+    padding: 1em 2em 1em 2em;
+    background-color: white;
+}
+
+input[type=submit]:hover {
+
+    cursor: pointer;
+    filter: brightness(80%);
 }
