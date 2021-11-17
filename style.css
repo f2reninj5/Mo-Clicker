@@ -42,6 +42,7 @@ h {
 
 #moustache {
 
+    margin: 2em;
     width: 40%;
     transition-duration: 0.1s;
     animation-fill-mode: forwards;
@@ -74,4 +75,13 @@ input[type=submit]:hover {
 
     cursor: pointer;
     filter: brightness(80%);
+}
+
+table, th, tr, td {
+
+	table-layout: fixed;
+	position: relative;
+	margin: auto;
+	padding: 0 2em 0 2em;
+	border-collapse: collapse;
 }

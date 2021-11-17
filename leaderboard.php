@@ -31,8 +31,6 @@
 
         header('Location: register.php');
     }
-
-    $user = ['username' => $username, 'clicks' => $clicks]
 ?>
 
 <html>
@@ -55,22 +53,41 @@
         <input id="mute_music" class="mute" type="image" style="left: 0; width: 5em; position: absolute;" src="images/sound/music_mute.svg" onclick="mute('mute_music', 'music')">
 
         <?php echo "Welcome, $username <br />"; ?>
-        
-        <a href="leaderboard.php" style="font-size: 2em; position: absolute; right: 0;">Leaderboard</a>
 
-        <h>Mo Clicker</h>
+        <a href="/" style="font-size: 2em; position: absolute; right: 0;">Back</a>
+
+        <h>Mo Clicker Leaderboard</h>
 
         <div>
 
-            <p id="clicks"> <?php echo $clicks; ?> </p><br>
-            <script> let user = <?php echo json_encode($user); ?> </script>
+            <table>
 
-            <input id="moustache" type="image" src="images/mo stache.svg" onclick="moustacheClick()">
+                <?php
+                
+                    $conn = connectDatabase();
+                    $result = mysqli_query($conn, "SELECT username, clicks FROM users ORDER BY clicks DESC");
+
+                    if (!$result) {
+
+                        echo 'Database error: ' . mysql_error($conn);
+                    }
+
+                    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+                    mysqli_free_result($result);
+                    mysqli_close($conn);
+
+                    foreach ($rows as $user) {
+                ?>
+
+                    <tr>
+                        <td><?php echo $user['username'] ?></td>
+                        <td><?php echo $user['clicks'] ?></td>
+                    </tr>
+
+                <?php } ?>
+            </table>
         </div>
-
-        <a href="https://movember.com/m/14690481?mc=1" style="font-size: 2em;">Click Here to Donate</a><br><br>
-
-        <img src="images/mo code.png">
 
         <footer>
 
@@ -91,7 +108,6 @@
             </table>
         </footer>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="script.js"></script>
     </body>
 </html>

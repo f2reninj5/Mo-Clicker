@@ -1,6 +1,8 @@
 
 <?php
 
+    require 'templates/mysql.php';
+
     $errors = ['username' => '', 'password' => ''];
     $username = $password = '';
 
@@ -12,6 +14,7 @@
     if (isset($_POST['login'])) {
 
         $username = $_POST['username'];
+        $password = $_POST['password'];
 
         if (empty($_POST['username'])) {
 
@@ -23,8 +26,47 @@
             $errors['password'] = 'A password is required.';
         }
 
+        $conn = connectDatabase();
+        $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
+
+        if (!$result) {
+
+            echo 'Database error: ' . mysqli_error($conn);
+        }
+
+        $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+        mysqli_free_result($result);
+        mysqli_close($conn);
+
+        if (empty($rows)) {
+
+            $errors['username'] = 'Account not found.';
+
+        } else {
+
+            if ($rows[0]['password'] != $password) {
+
+                $errors['password'] = 'Incorrect password.';
+            }
+        }
+
         if (!array_filter($errors)) {
 
+            $session = uniqid('', true);
+
+            $conn = connectDatabase();
+            $result = mysqli_query($conn, "UPDATE users SET session = '$session' WHERE username = '$username'");
+
+            if (!$result) {
+
+                echo 'Database error: ' . mysqli_error($conn);
+            }
+
+            mysqli_close($conn);
+
+            setcookie('session', $session, time() + (60 * 60 * 24 * 30), '/');
+            header('Location: /');
         }
     }
 ?>
@@ -45,7 +87,7 @@
     <body>
 
         <div>
-            <form>
+            <form method="POST" action="login.php">
 
                 Login<br>
                 <input type="text" name="username" value="<?php echo htmlspecialchars($username) ?>" placeholder="Username"><br>
@@ -54,6 +96,9 @@
                 <p><?php echo $errors['password']; ?></p>
                 <input type="submit" name="login"><br>
             </form>
+            
+            <p>Not got an account?</p>
+            <a href="register.php">Register</a>
         </div>
     </body>
 </html>
