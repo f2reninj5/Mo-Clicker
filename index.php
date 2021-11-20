@@ -70,7 +70,7 @@
 
         <a href="https://movember.com/m/14690481?mc=1" style="font-size: 2em;">Click Here to Donate</a><br><br>
 
-        <img src="images/mo code.png">
+        <img src="images/mo code.png" style="width: 25%;">
 
         <footer>
 
@@ -91,7 +91,9 @@
             </table>
         </footer>
 
+        <script src="page-lifecycle/dist/lifecycle.es5.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="mute.js"></script>
         <script src="script.js"></script>
     </body>
 </html>

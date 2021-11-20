@@ -62,10 +62,16 @@
 
             <table>
 
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Clicks</th>
+                </tr>
+
                 <?php
                 
                     $conn = connectDatabase();
-                    $result = mysqli_query($conn, "SELECT username, clicks FROM users ORDER BY clicks DESC");
+                    $result = mysqli_query($conn, "SELECT username, clicks FROM users WHERE clicks > 0 ORDER BY clicks DESC");
 
                     if (!$result) {
 
@@ -77,12 +83,17 @@
                     mysqli_free_result($result);
                     mysqli_close($conn);
 
+                    $index = 0;
+
                     foreach ($rows as $user) {
+
+                        $index ++;
                 ?>
 
                     <tr>
-                        <td><?php echo $user['username'] ?></td>
-                        <td><?php echo $user['clicks'] ?></td>
+                        <td><?php echo $index; ?></td>
+                        <td><?php echo $user['username']; ?></td>
+                        <td><?php echo $user['clicks']; ?></td>
                     </tr>
 
                 <?php } ?>
@@ -107,7 +118,7 @@
                 </tr>
             </table>
         </footer>
-
-        <script src="script.js"></script>
+        
+        <script src="mute.js"></script>
     </body>
 </html>

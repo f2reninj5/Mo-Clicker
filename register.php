@@ -79,6 +79,8 @@
 
     <body>
 
+        <h>Mo Clicker</h>
+
         <div>
             <form method="POST" action="register.php">
 

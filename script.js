@@ -11,29 +11,21 @@ $(document).ready(() => {
             clicks: user.clicks
         })
 
-    }, 1000 * 60)
+    }, 1000 * 20)
 })
+
+window.onbeforeunload = function(event) {
+
+    let data = new FormData()
+    data.append('username', String(user.username))
+    data.append('clicks', String(user.clicks))
+
+    navigator.sendBeacon('upload-clicks.php', data)
+}
 
 async function delay(time) {
 
 	return await new Promise(resolve => setTimeout(resolve, time))
-}
-
-function mute(buttonId, audioId) {
-
-    let button = document.getElementById(buttonId)
-    let audio = document.getElementById(audioId)
-
-    if (audio.paused) {
-
-        button.src = 'images/sound/music_unmute.svg'
-        audio.play()
-
-    } else {
-
-        button.src = 'images/sound/music_mute.svg'
-        audio.pause()
-    }
 }
 
 async function moustacheClick() {

@@ -86,6 +86,8 @@
 
     <body>
 
+        <h>Mo Clicker</h>
+
         <div>
             <form method="POST" action="login.php">
 
