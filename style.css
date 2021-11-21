@@ -28,6 +28,7 @@ body {
 
 div {
 
+    position: relative;
     background-color: #ededee;
     padding: 1em;
     margin-left: 1em;
@@ -50,6 +51,7 @@ h {
 
 #moustache:hover {
 
+    position: relative;
     cursor: pointer;
     transform: scale(105%);
 }

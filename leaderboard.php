@@ -60,43 +60,11 @@
 
         <div>
 
-            <table>
+            <button id="refresh" style="font-size: 1em; position: absolute; right: 0; margin: 0 1em 0 1em;">Refresh</button>
 
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Clicks</th>
-                </tr>
+            <table id="leaderboard">
 
-                <?php
-                
-                    $conn = connectDatabase();
-                    $result = mysqli_query($conn, "SELECT username, clicks FROM users WHERE clicks > 0 ORDER BY clicks DESC");
-
-                    if (!$result) {
-
-                        echo 'Database error: ' . mysql_error($conn);
-                    }
-
-                    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-                    mysqli_free_result($result);
-                    mysqli_close($conn);
-
-                    $index = 0;
-
-                    foreach ($rows as $user) {
-
-                        $index ++;
-                ?>
-
-                    <tr>
-                        <td><?php echo $index; ?></td>
-                        <td><?php echo $user['username']; ?></td>
-                        <td><?php echo $user['clicks']; ?></td>
-                    </tr>
-
-                <?php } ?>
+                <?php require 'templates/leaderboard-rows.php'; ?>
             </table>
         </div>
 
@@ -119,6 +87,17 @@
             </table>
         </footer>
         
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="mute.js"></script>
+        <script>
+
+            $(document).ready(() => {
+
+                $('#refresh').click(() => {
+
+                    $('#leaderboard').load('templates/leaderboard-rows.php')
+                })
+            })
+        </script>
     </body>
 </html>

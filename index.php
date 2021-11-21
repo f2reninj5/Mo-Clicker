@@ -7,7 +7,7 @@
         $session = $_COOKIE['session'];
 
         $conn = connectDatabase();
-        $result = mysqli_query($conn, "SELECT username, clicks FROM users WHERE session = '$session'");
+        $result = mysqli_query($conn, "SELECT username, clicks, points, clicker FROM users WHERE session = '$session'");
 
         if (!$result) {
 
@@ -21,6 +21,8 @@
 
             $username = htmlspecialchars($rows[0]['username']);
             $clicks = intval($rows[0]['clicks']);
+            $points = intval($rows[0]['points']);
+            $clicker = intval($rows[0]['clicker']);
 
         } else {
 
@@ -32,7 +34,7 @@
         header('Location: register.php');
     }
 
-    $user = ['username' => $username, 'clicks' => $clicks]
+    $user = ['username' => $username, 'clicks' => $clicks , 'points' => $points, 'clicker' => $clicker];
 ?>
 
 <html>
@@ -62,13 +64,24 @@
 
         <div>
 
-            <p id="clicks"> <?php echo $clicks; ?> </p><br>
+            <p id="points"> <?php echo number_format($points); ?> </p><br>
             <script> let user = <?php echo json_encode($user); ?> </script>
 
-            <input id="moustache" type="image" src="images/mo stache.svg" onclick="moustacheClick()">
+            <div style="position: absolute; left: 0;">
+
+                <p>Upgrade Clicker</p>
+                <table>
+                    <tr><td>Level</td><td id="level"></td></tr>
+                    <tr><td>Points per click</td><td id="value"></td></tr>
+                    <tr><td>Upgrade cost</td><td id="cost"></td></tr>
+                </table>
+                <button id="clicker">Upgrade</button>
+            </div>
+
+            <input id="moustache" type="image" src="images/mo stache.svg">
         </div>
 
-        <a href="https://movember.com/m/14690481?mc=1" style="font-size: 2em;">Click Here to Donate</a><br><br>
+        <a href="https://movember.com/m/14690481?mc=1" style="font-size: 2em;">Donate to Movember Charity</a><br><br>
 
         <img src="images/mo code.png" style="width: 25%;">
 
