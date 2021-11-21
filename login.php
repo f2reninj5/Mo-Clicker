@@ -102,5 +102,24 @@
             <p>Not got an account?</p>
             <a href="register.php">Register</a>
         </div>
+
+        <footer>
+
+            <h style="font-size: 2em;">Credits</h>
+
+            <table>
+
+                <tr>
+
+                    <td>Computer Stuff</td>
+                    <td>Maks Nowak</td>
+                </tr>
+                <tr>
+
+                    <td>Music</td>
+                    <td>Sam Katz</td>
+                </tr>
+            </table>
+        </footer>
     </body>
 </html>
