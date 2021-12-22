@@ -54,7 +54,7 @@ $(document).ready(() => {
 
     $('#clicker').click(() => {
 
-        if (user.points >= user.upgradeCost && user.clicker < 500) {
+        if (user.points >= user.upgradeCost && user.clicker < 1000) {
 
             user.points -= user.upgradeCost
             user.clicker ++
